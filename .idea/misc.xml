@@ -13,12 +13,14 @@
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/orange_pill.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/start_background.xml" value="0.136" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/start_button.xml" value="0.138" />
-        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_cart.xml" value="0.1" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_cart.xml" value="0.2" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_food.xml" value="0.16216216216216217" />
-        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_food_info.xml" value="0.176" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_food_info.xml" value="0.264" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_home.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_menu.xml" value="0.16216216216216217" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_order.xml" value="0.25" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_start.xml" value="0.176" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_cartfood.xml" value="0.25" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_food.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_type.xml" value="0.16216216216216217" />
       </map>

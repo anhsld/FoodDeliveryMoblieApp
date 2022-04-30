@@ -16,7 +16,7 @@ import com.example.quanlydoan.ui.foodinfo.FoodInfoActivity;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class    HomeActivity extends AppCompatActivity {
     GridView gridViewHomeFood;
 
     ArrayList<Type> types = new ArrayList<>();
