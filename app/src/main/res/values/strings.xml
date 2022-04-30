@@ -3,4 +3,16 @@
     <string name="start_text_1">Enjoy</string>
     <string name="start_text_2">Eating</string>
     <string name="start_text_3">All the delicious food on your phone</string>
+    <string name="get_started">Get Started</string>
+    <string name="hi_name">Hi Leonardo</string>
+    <string name="search_and_order">Search and Order</string>
+    <string name="search_your_favorite_food">Search your Favorite Food</string>
+    <string name="categories">Categories</string>
+    <string name="recommended">Recommended</string>
+    <string name="pizza">Pizza</string>
+    <string name="foods">Foods</string>
+    <string name="price">$13.10</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="one">1</string>
 </resources>

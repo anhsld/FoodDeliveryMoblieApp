@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/start_background"
     android:orientation="vertical"
-    tools:context=".ui.StartActivity">
+    tools:context=".ui.start.StartActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -24,42 +24,50 @@
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:src="@drawable/start" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
+        android:paddingLeft="24dp"
         android:text="@string/start_text_1"
         android:textColor="#2C46D8"
-        android:paddingLeft="24dp"
         android:textSize="24dp"
         android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
         android:text="@string/start_text_2"
         android:textColor="#2C46D8"
-        android:paddingLeft="24dp"
         android:textSize="24dp"
         android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
         android:text="@string/start_text_3"
         android:textColor="#2C46D8"
-        android:paddingLeft="24dp"
         android:textSize="18dp"
         android:textStyle="bold" />
 
-    <View android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-
     <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnStart"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="-80dp"
-        android:background="@drawable/start_button">
-
-    </View>
+        android:text="@string/get_started"
+        android:textColor="@color/orange"
+        android:background="@drawable/start_button"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="vertical"/>
 </LinearLayout>
