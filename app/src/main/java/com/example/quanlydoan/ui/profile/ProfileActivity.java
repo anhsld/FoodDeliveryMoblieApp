@@ -180,6 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
                 User user1 = dataSnapshot.getValue(User.class);
                 Log.e(TAG, "Value is: " + user1.getFullName());
                 PrefsHelper.getInstance(getApplicationContext()).setCurrentUser(user);
+                notice("Update profile successful!");
             }
 
             @Override
@@ -189,4 +190,5 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 }

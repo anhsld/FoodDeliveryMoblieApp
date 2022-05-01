@@ -62,11 +62,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean checkInput() {
         if (editTextRegisterFullname.getText().toString().equals("") || editTextRegisterUsername.getText().toString().equals("") || editTextRegisterPasswordRetype.getText().toString().equals("") || editTextRegisterPassword.getText().toString().equals("")) {
-            notice("Thông tin không được trống");
+            notice("Info cannot empty");
             return false;
         }
         if (!editTextRegisterPassword.getText().toString().equals(editTextRegisterPasswordRetype.getText().toString())){
-            notice("Mật khẩu nhập lại không trùng khớp");
+            notice("Retype-password not incorrect");
             return false;
         }
 
@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user1 = dataSnapshot.getValue(User.class);
-                        notice("Đăng ký thành công");
+                        notice("Register successful!!!");
                         Log.e(TAG, "Value is: " + user1.getFullName());
                     }
 
