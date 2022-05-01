@@ -20,7 +20,9 @@
     <ListView
         android:id="@+id/listViewCart"
         android:layout_width="match_parent"
-        android:layout_height="480dp" />
+        android:layout_height="420dp"
+        android:layout_marginTop="12dp"
+        android:dividerHeight="12dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -122,4 +124,16 @@
                 android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/primary_button"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:text="@string/check_out"
+        android:textColor="@color/white" />
 </LinearLayout>

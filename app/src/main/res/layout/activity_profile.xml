@@ -1,9 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical"
     tools:context=".ui.profile.ProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/start_background"
+        android:orientation="vertical"
+        android:paddingVertical="20dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/customer"
+            app:shapeAppearanceOverlay="@style/style_circle_image"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="440dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp">
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/fullname" />
+
+            <EditText
+                style="@style/style_input"
+                android:text="@string/fullname" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/phone" />
+
+            <EditText
+                style="@style/style_input"
+                android:text="@string/phone" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/email" />
+
+            <EditText
+                style="@style/style_input"
+                android:text="@string/email" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/address" />
+
+            <EditText
+                style="@style/style_input"
+                android:text="@string/address" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/link_avatar" />
+
+            <EditText
+                style="@style/style_input"
+                android:text="@string/link_avatar" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/password" />
+
+            <EditText
+                style="@style/style_input"
+                android:inputType="textPassword"
+                android:text="@string/password" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/retype_password" />
+
+            <EditText
+                style="@style/style_input"
+                android:inputType="textPassword"
+                android:text="@string/password" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/primary_button"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:text="@string/update"
+        android:textColor="@color/white" />
+
+</LinearLayout>

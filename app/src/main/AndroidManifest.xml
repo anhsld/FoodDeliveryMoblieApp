@@ -32,6 +32,9 @@
             android:name=".ui.start.MenuActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.start.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.start.StartActivity"
             android:exported="true">
             <intent-filter>

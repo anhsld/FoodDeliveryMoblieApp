@@ -50,7 +50,6 @@
                 app:shapeAppearanceOverlay="@style/style_circle_image"
                 app:strokeColor="@color/white"
                 app:strokeWidth="1dp" />
-            ...
             />
         </LinearLayout>
     </LinearLayout>

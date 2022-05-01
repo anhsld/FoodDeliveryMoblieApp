@@ -5,6 +5,7 @@
     <string name="start_text_3">All the delicious food on your phone</string>
     <string name="get_started">Get Started</string>
     <string name="hi_name">Hi Leonardo</string>
+    <string name="name_example">Leonardo</string>
     <string name="search_and_order">Search and Order</string>
     <string name="search_your_favorite_food">Search your Favorite Food</string>
     <string name="categories">Categories</string>
@@ -16,6 +17,7 @@
     <string name="minus">-</string>
     <string name="one">1</string>
     <string name="thong_tin">Thông tin</string>
+    <string name="show_info">Show info</string>
     <string name="description">LLịch sử của pizza bắt nguồn từ thời cổ đại, khi nhiều nền văn hóa cổ đại làm ra bánhLịch sử của pizza bắt nguồn từ thời cổ đại, khi nhiều nền văn hóa cổ đại làm ra bánhLịch sử của pizza bắt nguồn từ thời cổ đại, khi nhiều nền văn hóa cổ đại làm ra bánhLịch sử của pizza bắt nguồn từ thời cổ đại, khi nhiều nền văn hóa cổ đại làm ra bánhịch sử của pizza bắt nguồn từ thời cổ đại, khi nhiều nền văn hóa cổ đại làm ra bánh mì dẹt với một lớp phủ bên trên. Họ hàng của pizza có lẽ là focaccia, một loại bánh mì dẹt của người La Mã tên là panis focacius,[1] được thêm vào một lớp phủ bên trên.[2] Pizza ngày nay được phát triển ở Napoli, khi người ta thêm cà chua vào món focaccia vào cuối thế kỉ 18.[cần dẫn nguồn]. Từ bánh pizza lần đầu tiên được ghi nhận vào năm 997 tại Gaeta[3] và liên tiếp ở nhiều vùng khác của Miền Trung và Nam Ý. Pizza được sử dụng chủ yếu trong nội địa nước Ý và được dùng bởi người di cư từ đó. Việc này đã thay đổi sau Thế chiến II, khi quân Đồng Minh đóng quân tại Ý và thưởng thức pizza cùng các món Ý khác.</string>
     <string name="total_price">Total Price</string>
     <string name="add_to_cart">Add to cart</string>
@@ -24,4 +26,28 @@
     <string name="tax">Tax</string>
     <string name="delivery_service">Delivery service</string>
     <string name="total">Total</string>
+    <string name="fullname">Fullname</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="retype_password">Retype password</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="avatar">Avatar</string>
+    <string name="link_avatar">Avatar</string>
+    <string name="update">Update</string>
+    <string name="check_out">Check out</string>
+    <string name="date_example">30/04/2022</string>
+    <string name="my_orders">My orders</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">"Login"</string>
+
 </resources>
