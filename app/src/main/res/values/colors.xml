@@ -14,4 +14,9 @@
     <color name="gray_text">#666</color>
     <color name="green">#3FB552</color>
 
+
+    <color name="transparent">#0000FFFF</color>
+    <color name="background">#151729</color>
+    <color name="foreground">@color/primary</color>
+
 </resources>
