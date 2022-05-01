@@ -20,16 +20,35 @@
     <ListView
         android:id="@+id/listViewCart"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="360dp"
         android:layout_marginTop="12dp"
         android:dividerHeight="12dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_white"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="12dp">
+        <EditText
+            android:id="@+id/editTextTypeVoucher"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:hint="@string/type_discount"/>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/bg_white"
         android:orientation="vertical"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:paddingVertical="12dp"
         android:paddingHorizontal="18dp">
         <LinearLayout
@@ -47,27 +66,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/price"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tax"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
+                android:id="@+id/textViewCartTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price"
@@ -89,6 +88,29 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <TextView
+                android:id="@+id/textViewCartShipCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/discount"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textViewCartDiscount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price"
@@ -116,6 +138,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <TextView
+                android:id="@+id/textViewCartTotalPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price"
@@ -125,7 +148,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/btnCartCheckout"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

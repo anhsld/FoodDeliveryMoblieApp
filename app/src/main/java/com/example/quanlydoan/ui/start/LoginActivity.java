@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.example.quanlydoan.R;
 import com.example.quanlydoan.data.PrefsHelper;
+import com.example.quanlydoan.data.model.Order;
 import com.example.quanlydoan.data.model.User;
+import com.example.quanlydoan.ui.BaseActivity;
 import com.example.quanlydoan.ui.register.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     Button btnLogin;
     EditText editTextLoginUsername, editTextLoginPassword;
     TextView btnLoginToRegister;
@@ -48,8 +50,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkInput())
+                if (checkInput()){
+                    showLoading();
                     login(String.valueOf(editTextLoginUsername.getText()), String.valueOf(editTextLoginPassword.getText()));
+                }
+                else{
+                    showMessage("Cannot empty!");
+                }
             }
         });
 
@@ -74,19 +81,24 @@ public class LoginActivity extends AppCompatActivity {
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                hideLoading();
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
                     if (user.getPassword().equals(password)) {
                         Log.e(TAG, user.getEmail());
                         PrefsHelper prefsHelper = PrefsHelper.getInstance(getApplicationContext());
                         prefsHelper.setCurrentUser(user);
+                        Order order = new Order();
+                        prefsHelper.setCurrentCart(order);
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
                     } else {
                         //wrong password
+                        showPopupMessage("Login failed!", R.raw.err);
                         Log.e(TAG, "SAI MAT KHAU ROI THANG DAU BUOI");
                     }
                 } else {
+                    showPopupMessage("Login failed!", R.raw.err);
                     // user not found
                 }
             }
@@ -94,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 //ignored
+                hideLoading();
             }
         });
     }

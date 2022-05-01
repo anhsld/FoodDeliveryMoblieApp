@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/logout"
                 android:textAlignment="textEnd"
-                android:textColor="@color/blue"/>
+                android:textColor="@color/gray_text"/>
             <View
                 android:layout_width="44dp"
                 android:layout_height="1dp"
@@ -53,11 +53,11 @@
             android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textColor="@color/blue"
+            android:textColor="@color/gray_text"
             android:text="@string/choose_avatar"
             />
         <View
-            android:layout_width="120dp"
+            android:layout_width="128dp"
             android:layout_height="1dp"
             android:layout_marginTop="-4dp"
             android:layout_gravity="center"
@@ -143,6 +143,6 @@
         android:gravity="center"
         android:orientation="vertical"
         android:text="@string/update"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
 </LinearLayout>

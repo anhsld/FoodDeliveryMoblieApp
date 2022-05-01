@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.quanlydoan.R;
 import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.data.model.User;
+import com.example.quanlydoan.ui.BaseActivity;
 import com.example.quanlydoan.ui.start.LoginActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,7 +35,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
     TextView btnProfileChooseAvatar, btnProfileLogout, btnProfileUpdate;
     ShapeableImageView imgProfileAvatar;
     EditText editTextProfileFullname, editTextProfilePhone, editTextProfileEmail, editTextProfileAddress, editTextProfilePassword, editTextProfileRetypePassword;
@@ -101,6 +102,8 @@ public class ProfileActivity extends AppCompatActivity {
         editTextProfilePhone.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getPhone());
         editTextProfileEmail.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getEmail());
         editTextProfileAddress.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getAddress());
+        editTextProfilePassword.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getPassword());
+        editTextProfileRetypePassword.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getPassword());
     }
 
     @Override
@@ -180,7 +183,7 @@ public class ProfileActivity extends AppCompatActivity {
                 User user1 = dataSnapshot.getValue(User.class);
                 Log.e(TAG, "Value is: " + user1.getFullName());
                 PrefsHelper.getInstance(getApplicationContext()).setCurrentUser(user);
-                notice("Update profile successful!");
+                showPopupMessage("Update profile successful!", R.raw.success);
             }
 
             @Override

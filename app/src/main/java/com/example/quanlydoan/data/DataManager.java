@@ -2,6 +2,7 @@ package com.example.quanlydoan.data;
 
 import android.net.Uri;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -28,6 +29,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -304,7 +306,6 @@ public class DataManager {
         order.setShipCost(order.getTotalPrice() * order.getDistance());
         order.setStatus("OnGoing");
         order.setTotalPayment(Math.max(order.getTotalPrice() + order.getShipCost() - order.getDiscount(), 0));
-//        order.setUserId(); // get user id from sharepref
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("order").push();

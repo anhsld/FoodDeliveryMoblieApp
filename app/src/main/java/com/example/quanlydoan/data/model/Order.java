@@ -1,6 +1,9 @@
 package com.example.quanlydoan.data.model;
 
+import android.util.Pair;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Serializable {
@@ -15,9 +18,11 @@ public class Order implements Serializable {
     private double lat;
     private double lng;
     private double distance;
-    private List<Order> foods;
+    private List<CartFood> foods = new ArrayList<>();
 
-    public Order() {}
+    public Order() {
+
+    }
 
     public String getOrderId() {
         return orderId;
@@ -107,11 +112,11 @@ public class Order implements Serializable {
         this.distance = distance;
     }
 
-    public List<Order> getFoods() {
+    public List<CartFood> getFoods() {
         return foods;
     }
 
-    public void setFoods(List<Order> foods) {
+    public void setFoods(List<CartFood> foods) {
         this.foods = foods;
     }
 }

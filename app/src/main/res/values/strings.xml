@@ -24,6 +24,8 @@
     <string name="my_cart">My cart</string>
     <string name="item_total">Item Total</string>
     <string name="tax">Tax</string>
+    <string name="discount">Discount</string>
+    <string name="type_discount">Type your discount</string>
     <string name="delivery_service">Delivery service</string>
     <string name="total">Total</string>
     <string name="fullname">Fullname</string>

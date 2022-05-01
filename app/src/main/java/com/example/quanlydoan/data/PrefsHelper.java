@@ -3,12 +3,14 @@ package com.example.quanlydoan.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.quanlydoan.data.model.Order;
 import com.example.quanlydoan.data.model.User;
 import com.google.gson.Gson;
 
 public class PrefsHelper {
 
     private static final String PREF_KEY_CURRENT_USER = "PREF_KEY_CURRENT_USER";
+    private static final String PREF_KEY_CURRENT_CART = "PREF_KEY_CURRENT_CART";
     private static PrefsHelper instance;
 
     SharedPreferences sharedPreferences;
@@ -84,6 +86,18 @@ public class PrefsHelper {
 
     public void removeCurrentUser() {
         sharedPreferences.edit().remove(PREF_KEY_CURRENT_USER).apply();
+        removeCurrentCart();
+    }
 
+    public Order getCurrentCart() {
+        return get(PREF_KEY_CURRENT_CART, Order.class, null);
+    }
+
+    public void setCurrentCart(Order order) {
+        put(PREF_KEY_CURRENT_CART, order);
+    }
+
+    public void removeCurrentCart() {
+        sharedPreferences.edit().remove(PREF_KEY_CURRENT_CART).apply();
     }
 }

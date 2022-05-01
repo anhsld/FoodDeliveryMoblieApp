@@ -79,12 +79,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         if(row_index==position){
             holder.llItemCategory.setBackgroundResource(R.drawable.bg_primary_elip);
-            holder.name.setTextColor(Color.parseColor("#FFC107"));
+//            holder.name.setTextColor(Color.parseColor("#BD9828"));
         }
         else
         {
             holder.llItemCategory.setBackgroundResource(R.drawable.bg_white_elip);
-            holder.name.setTextColor(Color.parseColor("#000000"));
+//            holder.name.setTextColor(Color.parseColor("#000000"));
         }
 
     }

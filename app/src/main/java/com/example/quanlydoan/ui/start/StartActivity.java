@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.quanlydoan.R;
+import com.example.quanlydoan.data.DataManager;
 import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.ui.BaseActivity;
 import com.example.quanlydoan.ui.home.HomeActivity;
@@ -37,6 +38,8 @@ public class StartActivity extends BaseActivity {
                     Intent intent = new Intent(StartActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
+//                showPopupMessage("kokoko", R.raw.success);
+//                DataManager.addOrder();
 
             }
         });

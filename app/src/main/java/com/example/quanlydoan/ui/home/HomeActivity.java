@@ -19,6 +19,7 @@ import com.example.quanlydoan.R;
 import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.data.model.Category;
 import com.example.quanlydoan.data.model.Food;
+import com.example.quanlydoan.ui.BaseActivity;
 import com.example.quanlydoan.ui.foodinfo.FoodInfoActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +31,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements CategoryAdapter.Callback {
+public class HomeActivity extends BaseActivity implements CategoryAdapter.Callback {
     ImageView imgHomeUser;
     GridView gridViewHomeFood;
     ArrayList<Category> categories = new ArrayList<>();
@@ -40,7 +41,7 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
     CategoryAdapter categoryAdapter;
     FoodAdapter foodAdapter;
     TextView btnHomeRefresh, textViewHomeFullname;
-    SearchView searViewHomeFood;
+    SearchView searchViewHomeFood;
 
     private String categoryFilter = "";
     private static final String TAG = "DataManager";
@@ -54,7 +55,7 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
         getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
         setControl();
         setEvent();
-        getCategories();
+        showLoading();
     }
 
     private void setEvent() {
@@ -82,6 +83,7 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
                 categoryAdapter = new CategoryAdapter(categories, HomeActivity.this);
                 recyclerViewType.setAdapter(categoryAdapter);
                 categoryFilter = "";
+                searchViewHomeFood.setQuery("", false);
                 getFoodsByCategory();
             }
         });
@@ -96,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
         recyclerViewType.setItemAnimator(new DefaultItemAnimator());
         gridViewHomeFood = findViewById(R.id.gridViewHomeFood);
         btnHomeRefresh = findViewById(R.id.btnHomeRefresh);
-        searViewHomeFood = findViewById(R.id.searViewHomeFood);
+        searchViewHomeFood = findViewById(R.id.searchViewHomeFood);
         imgHomeUser = findViewById(R.id.imgHomeUser);
         textViewHomeFullname = findViewById(R.id.textViewHomeFullname);
         textViewHomeFullname.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getFullName());
@@ -158,6 +160,7 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                hideLoading();
                 foods.clear();
                 backupFoods.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -166,7 +169,7 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
                     backupFoods.add(food);
                     foodAdapter.notifyDataSetChanged();
 //                    Search
-                    searViewHomeFood.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    searchViewHomeFood.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                         @Override
                         public boolean onQueryTextSubmit(String s) {
                             return false;
