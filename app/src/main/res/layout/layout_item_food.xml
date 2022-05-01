@@ -3,7 +3,8 @@
     android:layout_width="160dp"
     android:layout_height="200dp"
     android:background="@drawable/bg_white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="8dp">
 
     <ImageView
         android:id="@+id/imgHomeFood"
@@ -19,11 +20,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
-        android:maxLines="1"
         android:text="@string/pizza"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingHorizontal="24dp"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:textStyle="bold" />
 
     <LinearLayout

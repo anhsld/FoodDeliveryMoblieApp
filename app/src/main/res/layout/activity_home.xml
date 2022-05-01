@@ -160,7 +160,6 @@
                     android:layout_marginTop="8dp"
                     android:horizontalSpacing="16dp"
                     android:numColumns="2"
-                    android:padding="16dp"
                     android:verticalSpacing="16dp" />
             </LinearLayout>
         </LinearLayout>

@@ -125,12 +125,12 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
     }
 
     private void getCategories() {
-        categories.clear();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("restaurant").child("categories");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                categories.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Category category = postSnapshot.getValue(com.example.quanlydoan.data.model.Category.class);
                     categories.add(category);
@@ -147,7 +147,6 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
     }
 
     public void getFoodsByCategory() {
-        foods.clear();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         Query query;
         if (categoryFilter == "") {
@@ -159,13 +158,13 @@ public class HomeActivity extends AppCompatActivity implements CategoryAdapter.C
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                foods.clear();
+                backupFoods.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Food food = postSnapshot.getValue(com.example.quanlydoan.data.model.Food.class);
-                    Log.e(TAG, "Value is: " + food.getName());
                     foods.add(food);
                     backupFoods.add(food);
                     foodAdapter.notifyDataSetChanged();
-
 //                    Search
                     searViewHomeFood.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                         @Override
