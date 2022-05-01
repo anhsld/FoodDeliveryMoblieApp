@@ -15,19 +15,58 @@
         android:orientation="vertical"
         android:paddingVertical="20dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="32dp"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/btnProfileLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blue"/>
+            <View
+                android:layout_width="44dp"
+                android:layout_height="1dp"
+                android:layout_gravity="right"
+                android:background="@color/blue"/>
+        </LinearLayout>
+
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfileAvatar"
             android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_height="125dp"
             android:layout_gravity="center"
+            android:scaleType="centerCrop"
             android:src="@drawable/customer"
             app:shapeAppearanceOverlay="@style/style_circle_image"
             app:strokeColor="@color/white"
             app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/btnProfileChooseAvatar"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/blue"
+            android:text="@string/choose_avatar"
+            />
+        <View
+            android:layout_width="120dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="-4dp"
+            android:layout_gravity="center"
+            android:background="@color/blue"/>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="440dp">
+        android:layout_height="400dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,6 +79,7 @@
                 android:text="@string/fullname" />
 
             <EditText
+                android:id="@+id/editTextProfileFullname"
                 style="@style/style_input"
                 android:text="@string/fullname" />
 
@@ -48,6 +88,7 @@
                 android:text="@string/phone" />
 
             <EditText
+                android:id="@+id/editTextProfilePhone"
                 style="@style/style_input"
                 android:text="@string/phone" />
 
@@ -56,6 +97,7 @@
                 android:text="@string/email" />
 
             <EditText
+                android:id="@+id/editTextProfileEmail"
                 style="@style/style_input"
                 android:text="@string/email" />
 
@@ -64,22 +106,16 @@
                 android:text="@string/address" />
 
             <EditText
+                android:id="@+id/editTextProfileAddress"
                 style="@style/style_input"
                 android:text="@string/address" />
-
-            <TextView
-                style="@style/style_profile_title"
-                android:text="@string/link_avatar" />
-
-            <EditText
-                style="@style/style_input"
-                android:text="@string/link_avatar" />
 
             <TextView
                 style="@style/style_profile_title"
                 android:text="@string/password" />
 
             <EditText
+                android:id="@+id/editTextProfilePassword"
                 style="@style/style_input"
                 android:inputType="textPassword"
                 android:text="@string/password" />
@@ -89,6 +125,7 @@
                 android:text="@string/retype_password" />
 
             <EditText
+                android:id="@+id/editTextProfileRetypePassword"
                 style="@style/style_input"
                 android:inputType="textPassword"
                 android:text="@string/password" />
@@ -96,7 +133,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/btnProfileUpdate"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

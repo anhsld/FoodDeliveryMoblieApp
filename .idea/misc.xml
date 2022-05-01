@@ -7,9 +7,11 @@
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable-v24/tab_unselect.xml" value="0.121" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable-v24/white_border.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/avatar_bg.xml" value="0.138" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/bg_primary_elip.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/bg_white.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/bg_white_elip.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/bg_white_shadow.xml" value="0.138" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/btn_primary.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/btn_show_order.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/change_color.xml" value="0.138" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/drawable/gray_pill.xml" value="0.138" />
@@ -21,17 +23,20 @@
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout-w936dp/activity_login.xml" value="0.176953125" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_cart.xml" value="0.2" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_food.xml" value="0.16216216216216217" />
-        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_food_info.xml" value="0.264" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_food_info.xml" value="0.2" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_home.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_login.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_menu.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_order.xml" value="0.25" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_profile.xml" value="0.176" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_register.xml" value="0.16" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/activity_start.xml" value="0.176" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_cartfood.xml" value="0.25" />
+        <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_category.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_food.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_order.xml" value="0.16216216216216217" />
         <entry key="..\:/Data/FileLapTrinh/QuanLyDoAn/app/src/main/res/layout/layout_item_type.xml" value="0.16216216216216217" />
+        <entry key="..\:/Users/binpr/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/auto_complete_list.xml" value="0.16216216216216217" />
       </map>
     </option>
   </component>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.quanlydoan.R;
+import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.ui.home.HomeActivity;
 
 public class StartActivity extends AppCompatActivity {
@@ -27,8 +28,15 @@ public class StartActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartActivity.this, LoginActivity.class);
-                startActivity(intent);
+                if(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser() != null){
+                    Intent intent = new Intent(StartActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(StartActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
     }

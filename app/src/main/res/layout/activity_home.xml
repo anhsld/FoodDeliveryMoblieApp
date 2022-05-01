@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textViewHomeFullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hi_name"
@@ -44,9 +45,11 @@
             android:orientation="vertical">
 
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgHomeUser"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/customer"
+                android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/style_circle_image"
                 app:strokeColor="@color/white"
                 app:strokeWidth="1dp" />
@@ -67,20 +70,36 @@
             app:shapeAppearanceOverlay="@style/style_radius_image" />
     </LinearLayout>
 
-    <SearchView
-        android:id="@+id/sv_TimKiemKH"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_white"
-        android:iconifiedByDefault="false"
-        android:inputType="textPersonName"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:queryHint="@string/search_and_order"
-        android:textColor="@color/black"
-        android:textColorHint="#AFA7A7"
-        android:textSize="14dp" />
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp">
+        <SearchView
+            android:id="@+id/searViewHomeFood"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_white"
+            android:iconifiedByDefault="false"
+            android:inputType="textPersonName"
+            android:orientation="horizontal"
+            android:queryHint="@string/search_and_order"
+            android:textColor="@color/black"
+            android:textColorHint="#AFA7A7"
+            android:textSize="14dp" />
+        <TextView
+            android:id="@+id/btnHomeRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/refresh"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="12dp"
+            android:textColor="@color/blue"
+            style="@style/style_clickable"
+            android:textSize="18dp"/>
+    </LinearLayout>
 
     <!--    <LinearLayout-->
     <!--        android:layout_width="match_parent"-->
