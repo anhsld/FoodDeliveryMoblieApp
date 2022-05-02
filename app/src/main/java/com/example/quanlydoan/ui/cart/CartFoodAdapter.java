@@ -1,6 +1,7 @@
 package com.example.quanlydoan.ui.cart;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.example.quanlydoan.R;
 import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.data.model.CartFood;
 import com.example.quanlydoan.data.model.Order;
+import com.example.quanlydoan.ui.orderInfo.OrderInfoActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class CartFoodAdapter extends ArrayAdapter<CartFood> {
         convertView = LayoutInflater.from(context).inflate(resource, null);
         CartFood cartFood = data.get(position);
         TextView txtCartItemFoodName, txtCartItemFoodPrice, txtCartItemFoodAllPrice, btnCartItemDec, btnCartItemInc, txtCartItemFoodAmount;
-        ImageView imgCartItemFood;
+        ImageView imgCartItemFood, btnCartItemRemove;
         txtCartItemFoodName = convertView.findViewById(R.id.txtCartItemFoodName);
         txtCartItemFoodPrice = convertView.findViewById(R.id.txtCartItemFoodPrice);
         txtCartItemFoodAllPrice = convertView.findViewById(R.id.txtCartItemFoodAllPrice);
@@ -50,11 +52,19 @@ public class CartFoodAdapter extends ArrayAdapter<CartFood> {
         imgCartItemFood = convertView.findViewById(R.id.imgCartItemFood);
         btnCartItemDec = convertView.findViewById(R.id.btnCartItemDec);
         btnCartItemInc = convertView.findViewById(R.id.btnCartItemInc);
-        txtCartItemFoodAmount.setText(""+cartFood.getAmount());
+        btnCartItemRemove = convertView.findViewById(R.id.btnCartItemRemove);
+        txtCartItemFoodAmount.setText("" + cartFood.getAmount());
         txtCartItemFoodName.setText(cartFood.getFood().getName());
-        txtCartItemFoodPrice.setText("Price: " + String.valueOf(cartFood.getFood().getPrice()));
-        txtCartItemFoodAllPrice.setText("Total: " + String.valueOf(cartFood.getFood().getPrice() * cartFood.getAmount()));
+        txtCartItemFoodPrice.setText("Price: $" + String.valueOf(cartFood.getFood().getPrice()));
+        txtCartItemFoodAllPrice.setText("Total: $" + String.valueOf(cartFood.getFood().getPrice() * cartFood.getAmount()));
         Picasso.get().load(cartFood.getFood().getImage()).into(imgCartItemFood);
+
+        if(context instanceof OrderInfoActivity){
+            btnCartItemDec.setVisibility(View.GONE);
+            btnCartItemInc.setVisibility(View.GONE);
+            btnCartItemRemove.setVisibility(View.GONE);
+            txtCartItemFoodAmount.setVisibility(View.GONE);
+        }
 
         btnCartItemDec.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +74,8 @@ public class CartFoodAdapter extends ArrayAdapter<CartFood> {
                 Order order = PrefsHelper.getInstance(context).getCurrentCart();
                 order.getFoods().get(position).setAmount(cartFood.getAmount());
                 PrefsHelper.getInstance(context).setCurrentCart(order);
-                txtCartItemFoodAmount.setText(""+cartFood.getAmount());
-                notifyDataSetChanged();
-                ((CartActivity) context).fillData();
+                txtCartItemFoodAmount.setText("" + cartFood.getAmount());
+                ((CartActivity) context).setData();
             }
         });
 
@@ -77,12 +86,20 @@ public class CartFoodAdapter extends ArrayAdapter<CartFood> {
                 Order order = PrefsHelper.getInstance(context).getCurrentCart();
                 order.getFoods().get(position).setAmount(cartFood.getAmount());
                 PrefsHelper.getInstance(context).setCurrentCart(order);
-                txtCartItemFoodAmount.setText(""+cartFood.getAmount());
-                notifyDataSetChanged();
-                ((CartActivity) context).fillData();
+                txtCartItemFoodAmount.setText("" + cartFood.getAmount());
+                ((CartActivity) context).setData();
             }
         });
 
+        btnCartItemRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Order order = PrefsHelper.getInstance(context).getCurrentCart();
+                order.getFoods().remove(position);
+                PrefsHelper.getInstance(context).setCurrentCart(order);
+                ((CartActivity) context).setData();
+            }
+        });
 
         return convertView;
     }

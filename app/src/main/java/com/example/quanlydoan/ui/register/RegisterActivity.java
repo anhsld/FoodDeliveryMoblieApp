@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -49,18 +50,23 @@ public class RegisterActivity extends BaseActivity {
 
 
     private boolean checkInput() {
-        if (editTextRegisterFullname.getText().toString().equals("")
-                || editTextRegisterUsername.getText().toString().equals("")
-                || editTextRegisterPasswordRetype.getText().toString().equals("")
-                || editTextRegisterPassword.getText().toString().equals("")) {
+        if (editTextRegisterFullname.getText().toString().trim().equals("")
+                || editTextRegisterUsername.getText().toString().trim().equals("")
+                || editTextRegisterPasswordRetype.getText().toString().trim().equals("")
+                || editTextRegisterPassword.getText().toString().trim().equals("")) {
             showMessage("Info cannot empty");
             return false;
         }
-        if (!editTextRegisterPassword.getText().toString().equals(editTextRegisterPasswordRetype.getText().toString())){
+        if (editTextRegisterUsername.getText().toString().contains(" ") ||
+                editTextRegisterPassword.getText().toString().contains(" ") ||
+                editTextRegisterPasswordRetype.getText().toString().contains(" ")) {
+            showMessage("Username and password cannot have space");
+            return false;
+        }
+        if (!editTextRegisterPassword.getText().toString().equals(editTextRegisterPasswordRetype.getText().toString())) {
             showMessage("Retype-password not incorrect");
             return false;
         }
-
         return true;
     }
 
@@ -69,6 +75,7 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (checkInput()) {
+                    showLoading();
                     checkUserExisted(editTextRegisterUsername.getText().toString());
                 }
             }
@@ -81,9 +88,10 @@ public class RegisterActivity extends BaseActivity {
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                hideLoading();
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
-                    showMessage("Người dùng đã tồn tại");
+                    showMessage("This username has been registed");
                     Log.e(TAG, user.getEmail());
                 } else {
                     register(editTextRegisterFullname.getText().toString(),
@@ -140,10 +148,14 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user1 = dataSnapshot.getValue(User.class);
-                showMessage("Register successful!!!");
                 hideLoading();
+                showMessage("Register successful!!!");
                 Log.e(TAG, "Value is: " + user1.getFullName());
-                finish();
+                Handler handler = new Handler();
+                handler.postDelayed(() -> {
+                    finish();
+                }, 1000);
+
             }
 
             @Override

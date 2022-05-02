@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class CartActivity extends BaseActivity {
     EditText editTextTypeVoucher;
     TextView textViewCartDiscount, textViewCartTotalPayment, textViewCartTotalPrice, textViewCartShipCost;
     Button btnCartCheckout;
+    ImageView imgCartEmpty;
 
     private ArrayList<CartFood> cartFoods = new ArrayList<>();
     private List<Discount> discountList = new ArrayList<>();
@@ -59,7 +61,7 @@ public class CartActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setEvent();
+        setData();
     }
 
     @Override
@@ -68,6 +70,7 @@ public class CartActivity extends BaseActivity {
         setContentView(R.layout.activity_cart);
         setControl();
         setEvent();
+        getDiscounts();
         setData();
     }
 
@@ -79,12 +82,14 @@ public class CartActivity extends BaseActivity {
         textViewCartTotalPrice = findViewById(R.id.textViewCartTotalPrice);
         textViewCartShipCost = findViewById(R.id.textViewCartShipCost);
         btnCartCheckout = findViewById(R.id.btnCartCheckout);
+        imgCartEmpty = findViewById(R.id.imgCartEmpty);
     }
 
     private void setEvent() {
         editTextTypeVoucher.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -106,24 +111,48 @@ public class CartActivity extends BaseActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
-        btnCartCheckout.setOnClickListener(view -> addOrder());
+        btnCartCheckout.setOnClickListener(view -> {
+            if (checkEmptyCart()) addOrder();
+        });
 
     }
 
+    private boolean checkEmptyCart() {
+        if (PrefsHelper.getInstance(getApplicationContext()).getCurrentCart().getFoods().size() == 0) {
+            showMessage("There are no foods in your cart");
+            return false;
+        }
+        return true;
+    }
+
+
     @SuppressLint("SetTextI18n")
-    private void setData() {
+    public void setData() {
         Order order = PrefsHelper.getInstance(getApplicationContext()).getCurrentCart();
         cartFoods.clear();
         cartFoods.addAll(order.getFoods());
         cartFoodAdapter = new CartFoodAdapter(this, R.layout.layout_item_cartfood, cartFoods);
         listViewCart.setAdapter(cartFoodAdapter);
-
-        getDiscounts();
-
+        if (cartFoods.size() == 0) {
+            showEmptyImg();
+        } else {
+            hideEmptyImg();
+        }
         fillData();
+    }
+
+    public void showEmptyImg() {
+        listViewCart.setVisibility(View.GONE);
+        imgCartEmpty.setVisibility(View.VISIBLE);
+    }
+
+    public void hideEmptyImg() {
+        listViewCart.setVisibility(View.VISIBLE);
+        imgCartEmpty.setVisibility(View.GONE);
     }
 
     @SuppressLint("SetTextI18n")
@@ -135,14 +164,15 @@ public class CartActivity extends BaseActivity {
         for (CartFood cartFood : cartFoods) {
             totalPrice += cartFood.getFood().getPrice() * cartFood.getAmount();
         }
+
+        double distance = Utils.calDistance(10.84729648975777, 106.78571634009982,
+                AppConstants.CURRENT_LATITUDE, AppConstants.CURRENT_LONGITUDE);
+        shipCost = totalPrice * distance * 0.1;
+        textViewCartShipCost.setText("$" + (double) Math.round(shipCost * 10) / 10);
         totalPayment = (totalPrice + shipCost) * (100 - salePercent) / 100;
         textViewCartTotalPrice.setText("$" + totalPrice);
         textViewCartTotalPayment.setText("$" + totalPayment);
 
-        double distance = Utils.calDistance(10.84729648975777, 106.78571634009982,
-                AppConstants.CURRENT_LATITUDE, AppConstants.CURRENT_LONGITUDE);
-        shipCost = totalPrice * distance / 2;
-        textViewCartShipCost.setText("$" + shipCost);
     }
 
     private void getDiscounts() {
@@ -179,8 +209,10 @@ public class CartActivity extends BaseActivity {
         order.setLng(AppConstants.CURRENT_LONGITUDE);
         order.setDistance(Utils.calDistance(10.84729648975777, 106.78571634009982,
                 order.getLat(), order.getLng()));
-        order.setShipCost(order.getTotalPrice() * order.getDistance());
+//        shipcost = 10% totalprice * khoang cach
+        order.setShipCost(order.getTotalPrice() * 0.1 * order.getDistance());
         order.setStatus(AppConstants.ORDER_ONGOING);
+        order.setUserId(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getUserId());
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(AppConstants.ORDER_REF).push();
@@ -193,21 +225,29 @@ public class CartActivity extends BaseActivity {
                 PrefsHelper.getInstance(getApplicationContext()).setCurrentCart(new Order());
                 Order order1 = snapshot.getValue(Order.class);
                 Log.e(TAG, order1.getOrderId());
-                showPopupMessage("Đặt đơn thành công", R.raw.success);
+                showPopupMessage("Order food successfull", R.raw.success);
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
                     // start activity chi tiet don dat hang
                     setData();
+                    clearVoucher();
+
                 }, AppConstants.DIALOG_POPUP_TIME);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e(TAG, "Failed to read value.", error.toException());
-                showPopupMessage("Đặt đơn thành công", R.raw.err);
+                showPopupMessage("Order food fail", R.raw.err);
                 hideLoading();
             }
         });
+    }
+
+    private void clearVoucher() {
+        textViewCartDiscount.setText("");
+        editTextTypeVoucher.setText("");
+        salePercent = 0;
     }
 
 

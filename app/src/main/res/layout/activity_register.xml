@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/style_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/start_background"
+    android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.register.RegisterActivity">
+    tools:context=".ui.start.LoginActivity">
 
     <TextView
+        android:id="@+id/tvStartTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="36dp"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:textColor="#2C46D8"
+        android:textColor="@color/primary"
         android:textSize="32dp"
         android:textStyle="bold" />
 
     <ImageView
-        android:layout_width="360dp"
-        android:layout_height="200dp"
+        android:id="@+id/ivStartLogo"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_below="@id/tvStartTitle"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/start" />
+        android:src="@drawable/logo" />
 
     <LinearLayout
+        android:id="@+id/llRegisterForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ivStartLogo"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:paddingHorizontal="36dp">
 
@@ -74,7 +82,6 @@
                 android:hint="@string/username"
                 android:textColorHint="@color/gray_text" />
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -125,17 +132,8 @@
 
         <Button
             android:id="@+id/btnRegister"
-            android:layout_width="320dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/orange_pill"
-            android:foreground="?attr/selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:text="@string/register"
-            android:textColor="@color/white" />
+            style="@style/style_bottom_btn"
+            android:text="@string/register" />
     </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>

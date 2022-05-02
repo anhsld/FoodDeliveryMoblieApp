@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/style_layout"
+    android:background="@color/white"
+    tools:context=".ui.orderInfo.OrderInfoActivity">
+
+    <TextView
+        android:id="@+id/tvOrderInfoTitle"
+        style="@style/style_screen_title"
+        android:layout_alignParentTop="true"
+        android:text="@string/my_order_history" />
+
+    <ListView
+        android:id="@+id/lvOrderInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llOrderInfoPrice"
+        android:layout_below="@+id/tvOrderInfoTitle" />
+
+    <LinearLayout
+        android:id="@+id/llOrderInfoPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_white"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_text_order_info"
+                android:text="@string/status" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvFoodInfoStatus"
+                style="@style/style_text_info_black"
+                android:text="@string/price" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_text_order_info"
+                android:text="@string/date" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvFoodInfoDate"
+                style="@style/style_text_info_black"
+                android:text="@string/date_example" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_text_order_info"
+                android:text="@string/delivery_service" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvFoodInfoShipCost"
+                style="@style/style_text_info_black"
+                android:layout_height="match_parent"
+                android:text="@string/price" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_text_order_info"
+                android:text="@string/item_total" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvFoodInfoTotalPrice"
+                style="@style/style_text_info_black"
+                android:text="@string/price" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

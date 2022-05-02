@@ -22,7 +22,7 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
     private List<Category> categories;
     private Callback callback;
-    private int row_index = -1;
+    public int row_index = -1;
     public interface Callback{
         void onItemClick(int position, String categoryId);
     }

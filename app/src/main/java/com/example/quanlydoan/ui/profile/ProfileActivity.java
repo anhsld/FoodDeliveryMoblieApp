@@ -68,7 +68,9 @@ public class ProfileActivity extends BaseActivity {
             Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
             startActivity(intent);
         });
-        btnProfileUpdate.setOnClickListener(view -> updateProfile());
+        btnProfileUpdate.setOnClickListener(view -> {
+            if(checkInput())updateProfile();
+        });
     }
 
     private void setControl() {
@@ -123,6 +125,28 @@ public class ProfileActivity extends BaseActivity {
             updateUser(user);
         }
 
+    }
+
+    private boolean checkInput() {
+        if (editTextProfileFullname.getText().toString().trim().equals("")) {
+            showMessage("Fullname required");
+            return false;
+        }
+        String regexStr = "^0[0-9]{9}$";
+        if (!editTextProfilePhone.getText().toString().trim().equals("") &&
+                !editTextProfilePhone.getText().toString().matches(regexStr)) {
+            showMessage("Phone number is incorrect format!");
+            return false;
+        }
+
+        regexStr = "^[A-Za-z0-9._%+-]+@[a-z]+\\.[a-z]{2,6}$";
+        if (!editTextProfileEmail.getText().toString().trim().equals("") &&
+                !editTextProfileEmail.getText().toString().matches(regexStr)) {
+            showMessage("Email is incorrect format!");
+            return false;
+        }
+
+        return true;
     }
 
     private void uploadImage(User user, Uri fileUri) {

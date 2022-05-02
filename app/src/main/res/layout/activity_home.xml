@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:orientation="vertical"
-    android:paddingHorizontal="12dp"
+    style="@style/style_layout"
     tools:context=".ui.home.HomeActivity">
 
     <LinearLayout
+        android:id="@+id/llHomeHeader"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="24dp"
         android:orientation="horizontal">
 
@@ -48,8 +46,8 @@
                 android:id="@+id/imgHomeUser"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/customer"
                 android:scaleType="centerCrop"
+                android:src="@drawable/customer"
                 app:shapeAppearanceOverlay="@style/style_circle_image"
                 app:strokeColor="@color/white"
                 app:strokeWidth="1dp" />
@@ -58,12 +56,14 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/llHomeSlide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/llHomeHeader"
         android:layout_marginTop="8dp"
-        app:cardElevation="0dp"
         app:cardBackgroundColor="@color/transparent"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/slider"
@@ -73,11 +73,14 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/llHomeSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_below="@id/llHomeSlide"
         android:layout_gravity="center"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal">
+
         <SearchView
             android:id="@+id/searchViewHomeFood"
             android:layout_width="240dp"
@@ -91,16 +94,17 @@
             android:textColor="@color/black"
             android:textColorHint="#AFA7A7"
             android:textSize="14dp" />
+
         <TextView
             android:id="@+id/btnHomeRefresh"
+            style="@style/style_clickable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/refresh"
             android:layout_gravity="center"
             android:layout_marginHorizontal="12dp"
+            android:text="@string/refresh"
             android:textColor="@color/blue"
-            style="@style/style_clickable"
-            android:textSize="18dp"/>
+            android:textSize="18dp" />
     </LinearLayout>
 
     <!--    <LinearLayout-->
@@ -120,9 +124,11 @@
     <!--    </LinearLayout>-->
 
     <ScrollView
-        android:layout_marginTop="12dp"
+        android:id="@+id/svHomeContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/llHomeSearch"
+        android:layout_marginTop="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -157,15 +163,15 @@
 
                 <GridView
                     android:id="@+id/gridViewHomeFood"
-                    android:nestedScrollingEnabled="true"
                     android:layout_width="match_parent"
                     android:layout_height="480dp"
                     android:layout_marginTop="8dp"
                     android:horizontalSpacing="16dp"
+                    android:nestedScrollingEnabled="true"
                     android:numColumns="2"
                     android:verticalSpacing="16dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

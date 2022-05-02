@@ -58,8 +58,7 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.Callba
     @Override
     protected void onResume() {
         super.onResume();
-        setControl();
-        setEvent();
+        setData();
     }
 
     @Override
@@ -96,6 +95,8 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.Callba
             @Override
             public void onClick(View view) {
                 categoryFilter = "";
+                ((CategoryAdapter) recyclerViewType.getAdapter()).row_index = -1;
+                ((CategoryAdapter) recyclerViewType.getAdapter()).notifyDataSetChanged();
                 searchViewHomeFood.setQuery("", false);
                 getFoodsByCategory();
             }

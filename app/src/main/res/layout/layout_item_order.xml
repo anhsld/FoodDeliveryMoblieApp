@@ -9,81 +9,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:background="@drawable/bg_white_shadow"
-        android:orientation="vertical"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp">
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:src="@drawable/home_icon" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="8dp">
-
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
 
             <TextView
-                android:id="@+id/textViewOrderDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/date_example"
-                android:textColor="#999"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#999" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewOrderName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="14dp"
-                android:text="@string/name_example"
-                android:textColor="@color/green" />
-
-            <LinearLayout
+                android:id="@+id/tvOrderItemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal">
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@string/retype_password"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/textViewOrderTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:paddingLeft="12dp"
-                    android:textStyle="bold"/>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/btnOrderShow"
-                    style="@style/style_clickable"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_show_order"
-                    android:text="@string/show_info"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="12dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tvOrderItemTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@string/retype_password"
+                android:textColor="#666" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvOrderItemPrice"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="@string/price"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </LinearLayout>
 
 </LinearLayout>

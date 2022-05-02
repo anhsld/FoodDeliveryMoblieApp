@@ -18,5 +18,12 @@
         android:id="@+id/listViewOrder"
         android:layout_marginTop="24dp"
         android:layout_width="match_parent"
-        android:layout_height="600dp"/>
+        android:layout_height="600dp"
+        />
+    <ImageView
+        android:id="@+id/ivOrderEmpty"
+        android:src="@drawable/empty_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 </LinearLayout>
