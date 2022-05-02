@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
+    private int taskInProcess = 0;
 
     private void showSnackBar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
@@ -71,5 +72,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showPopupMessage(int resId, int animation) {
         showPopupMessage(getString(resId), animation);
+    }
+
+    public void startMultiProcess() {
+        if (++taskInProcess == 1) showLoading();
+    }
+    public void endMultiProcess() {
+        if (--taskInProcess == 0) hideLoading();
     }
 }

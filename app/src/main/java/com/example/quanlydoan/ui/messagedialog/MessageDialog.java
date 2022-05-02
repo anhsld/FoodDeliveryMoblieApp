@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.quanlydoan.R;
+import com.example.quanlydoan.ui.AppConstants;
 
 public class MessageDialog extends Dialog {
     TextView txtMessage;
@@ -45,6 +46,6 @@ public class MessageDialog extends Dialog {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             dismiss();
-        }, 2000);
+        }, AppConstants.DIALOG_POPUP_TIME);
     }
 }

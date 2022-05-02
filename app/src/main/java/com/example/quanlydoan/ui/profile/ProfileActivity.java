@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.quanlydoan.R;
 import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.data.model.User;
+import com.example.quanlydoan.ui.AppConstants;
 import com.example.quanlydoan.ui.BaseActivity;
 import com.example.quanlydoan.ui.start.LoginActivity;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -40,47 +41,34 @@ public class ProfileActivity extends BaseActivity {
     ShapeableImageView imgProfileAvatar;
     EditText editTextProfileFullname, editTextProfilePhone, editTextProfileEmail, editTextProfileAddress, editTextProfilePassword, editTextProfileRetypePassword;
 
+    private final String TAG = "ProfileActivity";
 
-    final int REQUEST_CODE_FOLDER = 123;
-    boolean chonHinh = false;
-    final String TAG = "TEST";
+    private User user;
+    private boolean chonHinh = false;
     Uri profileImgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getSupportActionBar().hide();
-        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
         setControl();
         fillData();
         setEvent();
     }
 
     private void setEvent() {
-        btnProfileChooseAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_CODE_FOLDER);
-            }
+        btnProfileChooseAvatar.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, AppConstants.REQUEST_CODE_FOLDER);
         });
 
-        btnProfileLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PrefsHelper.getInstance(getApplicationContext()).removeCurrentUser();
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        btnProfileLogout.setOnClickListener(view -> {
+            PrefsHelper.getInstance(getApplicationContext()).removeCurrentUser();
+            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
-        btnProfileUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateProfile();
-            }
-        });
+        btnProfileUpdate.setOnClickListener(view -> updateProfile());
     }
 
     private void setControl() {
@@ -97,99 +85,88 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void fillData() {
-        Picasso.get().load(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getAvatar()).into(imgProfileAvatar);
-        editTextProfileFullname.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getFullName());
-        editTextProfilePhone.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getPhone());
-        editTextProfileEmail.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getEmail());
-        editTextProfileAddress.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getAddress());
-        editTextProfilePassword.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getPassword());
-        editTextProfileRetypePassword.setText(PrefsHelper.getInstance(getApplicationContext()).getCurrentUser().getPassword());
+        user = PrefsHelper.getInstance(getApplicationContext()).getCurrentUser();
+        Picasso.get().load(user.getAvatar()).into(imgProfileAvatar);
+        editTextProfileFullname.setText(user.getFullName());
+        editTextProfilePhone.setText(user.getPhone());
+        editTextProfileEmail.setText(user.getEmail());
+        editTextProfileAddress.setText(user.getAddress());
+        editTextProfilePassword.setText(user.getPassword());
+        editTextProfileRetypePassword.setText(user.getPassword());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //lấy hình từ folder
-        if (requestCode == REQUEST_CODE_FOLDER) {
+        if (requestCode == AppConstants.REQUEST_CODE_FOLDER) {
             if (resultCode == RESULT_OK && data != null) {
                 Uri uri = data.getData();
-                try {
-                    profileImgUri = data.getData();
-                    chonHinh = true;
-                    InputStream inputStream = getContentResolver().openInputStream(uri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    imgProfileAvatar.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                profileImgUri = data.getData();
+                chonHinh = true;
+                Picasso.get().load(uri).into(imgProfileAvatar);
             }
         }
     }
 
-    private void notice(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT);
-        snackbar.show();
-    }
-
     public void updateProfile() {
-        String fullname = editTextProfileFullname.getText().toString();
-        String phone = editTextProfilePhone.getText().toString();
-        String email = editTextProfileEmail.getText().toString();
-        String address = editTextProfileAddress.getText().toString();
-        String password = editTextProfilePassword.getText().toString();
-        User user = PrefsHelper.getInstance(getApplicationContext()).getCurrentUser();
-        user.setFullName(fullname);
-        user.setPhone(phone);
-        user.setEmail(email);
-        user.setAddress(address);
-        user.setPassword(password);
+        user.setFullName(editTextProfileFullname.getText().toString());
+        user.setPhone(editTextProfilePhone.getText().toString());
+        user.setEmail(editTextProfileEmail.getText().toString());
+        user.setAddress(editTextProfileAddress.getText().toString());
+        user.setPassword(editTextProfilePassword.getText().toString());
 
         //upload file to firebase storage
         if (chonHinh) {
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
-            StorageReference ref = storageRef.child("avatar/" + user.getUsername());
-            UploadTask uploadTask = ref.putFile(profileImgUri);
-            uploadTask.continueWithTask(task -> {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-                return ref.getDownloadUrl();
-            }).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    //get url image
-                    Uri downloadUri = task.getResult();
-                    user.setAvatar(downloadUri.toString());
-                    updateProfileNoPhoto(user);
-                } else {
-                }
-            });
+            uploadImage(user, profileImgUri);
         } else {
-            updateProfileNoPhoto(user);
+            updateUser(user);
         }
 
     }
 
-    private void updateProfileNoPhoto(User user) {
-        //Now insert user
-        user.setUserId(user.getUsername());
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("user").child(user.getUsername());
-        usersRef.setValue(user);
-        usersRef.addValueEventListener(new ValueEventListener() {
+    private void uploadImage(User user, Uri fileUri) {
+        showLoading();
+
+        StorageReference ref = FirebaseStorage.getInstance().getReference()
+                .child("avatar/" + user.getUsername());
+        UploadTask uploadTask = ref.putFile(fileUri);
+        uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw task.getException();
+            }
+            return ref.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                //get url image
+                Uri downloadUri = task.getResult();
+                user.setAvatar(downloadUri.toString());
+
+                //Now insert user
+                updateUser(user);
+            }
+        });
+    }
+
+    private void updateUser(User user) {
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference(AppConstants.USER_REF).child(user.getUsername());
+        ref.setValue(user);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user1 = dataSnapshot.getValue(User.class);
                 Log.e(TAG, "Value is: " + user1.getFullName());
                 PrefsHelper.getInstance(getApplicationContext()).setCurrentUser(user);
                 showPopupMessage("Update profile successful!", R.raw.success);
+                hideLoading();
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                Log.e(TAG, "Failed to read value.", error.toException());
+                showMessage("Đã có lỗi khi cập nhật thông tin cá nhân");
+                hideLoading();
             }
         });
     }

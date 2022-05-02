@@ -1,7 +1,6 @@
 package com.example.quanlydoan.ui.start;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import com.example.quanlydoan.R;
 import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.data.model.Order;
 import com.example.quanlydoan.data.model.User;
+import com.example.quanlydoan.ui.AppConstants;
 import com.example.quanlydoan.ui.BaseActivity;
 import com.example.quanlydoan.ui.register.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -27,14 +27,13 @@ public class LoginActivity extends BaseActivity {
     Button btnLogin;
     EditText editTextLoginUsername, editTextLoginPassword;
     TextView btnLoginToRegister;
-    private static final String TAG = "DataManager";
+
+    private final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
-        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
         setControl();
         setEvent();
     }
@@ -51,8 +50,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (checkInput()){
-                    showLoading();
-                    login(String.valueOf(editTextLoginUsername.getText()), String.valueOf(editTextLoginPassword.getText()));
+                    login(String.valueOf(editTextLoginUsername.getText()),
+                            String.valueOf(editTextLoginPassword.getText()));
                 }
                 else{
                     showMessage("Cannot empty!");
@@ -76,36 +75,37 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login(String username, String password) {
+        showLoading();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("user").child(username);
+        DatabaseReference usersRef = database.getReference(AppConstants.USER_REF).child(username);
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                hideLoading();
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
                     if (user.getPassword().equals(password)) {
                         Log.e(TAG, user.getEmail());
+
                         PrefsHelper prefsHelper = PrefsHelper.getInstance(getApplicationContext());
                         prefsHelper.setCurrentUser(user);
                         Order order = new Order();
                         prefsHelper.setCurrentCart(order);
+
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
-                        //wrong password
-                        showPopupMessage("Login failed!", R.raw.err);
-                        Log.e(TAG, "SAI MAT KHAU ROI THANG DAU BUOI");
+                        showMessage("Wrong password");
                     }
                 } else {
                     showPopupMessage("Login failed!", R.raw.err);
-                    // user not found
                 }
+                hideLoading();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                //ignored
+                showPopupMessage("Login failed!", R.raw.err);
                 hideLoading();
             }
         });

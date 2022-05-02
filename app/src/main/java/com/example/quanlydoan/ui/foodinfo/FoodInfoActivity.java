@@ -1,9 +1,8 @@
 package com.example.quanlydoan.ui.foodinfo;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +13,7 @@ import com.example.quanlydoan.data.PrefsHelper;
 import com.example.quanlydoan.data.model.CartFood;
 import com.example.quanlydoan.data.model.Food;
 import com.example.quanlydoan.data.model.Order;
+import com.example.quanlydoan.ui.AppConstants;
 import com.example.quanlydoan.ui.BaseActivity;
 import com.squareup.picasso.Picasso;
 
@@ -30,11 +30,9 @@ public class FoodInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_info);
-        getSupportActionBar().hide();
-        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
-        food = (Food) getIntent().getSerializableExtra("food");
         setControl();
         setEvent();
+        fillData();
     }
 
     private void setControl() {
@@ -50,8 +48,6 @@ public class FoodInfoActivity extends BaseActivity {
     }
 
     private void setEvent() {
-        fillData();
-
         btnFoodInfoDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +56,6 @@ public class FoodInfoActivity extends BaseActivity {
                 fillData();
             }
         });
-
         btnFoodInfoInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,13 +63,12 @@ public class FoodInfoActivity extends BaseActivity {
                 fillData();
             }
         });
-
         btnFoodInfoAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Order order = PrefsHelper.getInstance(getApplicationContext()).getCurrentCart();
                 List<CartFood> foods = order.getFoods();
-                Food food1 = (Food) getIntent().getSerializableExtra("food");
+                Food food1 = (Food) getIntent().getSerializableExtra(AppConstants.EXTRA_FOOD_KEY);
                 CartFood cartFood = new CartFood();
                 cartFood.setFood(food1);
                 cartFood.setAmount(amount);
@@ -98,12 +92,14 @@ public class FoodInfoActivity extends BaseActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void fillData() {
+        food = (Food) getIntent().getSerializableExtra(AppConstants.EXTRA_FOOD_KEY);
         Picasso.get().load(food.getImage()).into(imgFoodInfo);
         textViewFoodInfoName.setText(food.getName());
         textViewFoodInfoDescripton.setText(food.getDescription());
         textViewFoodInfoAmount.setText(String.valueOf(amount));
-        textViewFoodInfoPrice.setText("$" + String.valueOf(food.getPrice()));
-        textViewFoodInfoTotal.setText("$"+String.valueOf(food.getPrice() * amount));
+        textViewFoodInfoPrice.setText("$" + food.getPrice());
+        textViewFoodInfoTotal.setText("$"+ food.getPrice() * amount);
     }
 }

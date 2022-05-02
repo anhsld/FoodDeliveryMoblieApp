@@ -2,20 +2,19 @@ package com.example.quanlydoan.ui.register;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.quanlydoan.R;
 import com.example.quanlydoan.data.model.User;
+import com.example.quanlydoan.ui.AppConstants;
+import com.example.quanlydoan.ui.BaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,21 +25,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
     EditText editTextRegisterFullname, editTextRegisterUsername, editTextRegisterPasswordRetype, editTextRegisterPassword;
     TextView btnRegister;
 
-
-    private final String TAG = "Tam";
+    private final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getSupportActionBar().hide();
-        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
         setControl();
         setEvent();
     }
@@ -53,20 +47,17 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
     }
 
-    private void notice(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT);
-        snackbar.show();
-    }
-
 
     private boolean checkInput() {
-        if (editTextRegisterFullname.getText().toString().equals("") || editTextRegisterUsername.getText().toString().equals("") || editTextRegisterPasswordRetype.getText().toString().equals("") || editTextRegisterPassword.getText().toString().equals("")) {
-            notice("Info cannot empty");
+        if (editTextRegisterFullname.getText().toString().equals("")
+                || editTextRegisterUsername.getText().toString().equals("")
+                || editTextRegisterPasswordRetype.getText().toString().equals("")
+                || editTextRegisterPassword.getText().toString().equals("")) {
+            showMessage("Info cannot empty");
             return false;
         }
         if (!editTextRegisterPassword.getText().toString().equals(editTextRegisterPasswordRetype.getText().toString())){
-            notice("Retype-password not incorrect");
+            showMessage("Retype-password not incorrect");
             return false;
         }
 
@@ -84,19 +75,46 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    private void checkUserExisted(String username) {
+        DatabaseReference usersRef = FirebaseDatabase.getInstance()
+                .getReference(AppConstants.USER_REF).child(username);
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    User user = snapshot.getValue(User.class);
+                    showMessage("Người dùng đã tồn tại");
+                    Log.e(TAG, user.getEmail());
+                } else {
+                    register(editTextRegisterFullname.getText().toString(),
+                            editTextRegisterUsername.getText().toString(),
+                            editTextRegisterPassword.getText().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //ignored
+            }
+        });
+    }
+
     public void register(String fullname, String username, String password) {
-        Uri file = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+        Uri fileUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
                 + "://" + getResources().getResourcePackageName(R.drawable.customer)
                 + '/' + getResources().getResourceTypeName(R.drawable.customer)
                 + '/' + getResources().getResourceEntryName(R.drawable.customer));
         User user = new User(fullname, username, password, "", "", "", "");
 
+        uploadImage(user, fileUri);
+    }
 
-        //upload file to firebase storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        StorageReference ref = storageRef.child("avatar/" + user.getUsername());
-        UploadTask uploadTask = ref.putFile(file);
+    private void uploadImage(User user, Uri fileUri) {
+        showLoading();
+
+        StorageReference ref = FirebaseStorage.getInstance().getReference()
+                .child("avatar/" + user.getUsername());
+        UploadTask uploadTask = ref.putFile(fileUri);
         uploadTask.continueWithTask(task -> {
             if (!task.isSuccessful()) {
                 throw task.getException();
@@ -107,55 +125,34 @@ public class RegisterActivity extends AppCompatActivity {
                 //get url image
                 Uri downloadUri = task.getResult();
                 user.setAvatar(downloadUri.toString());
-                user.setUserId(user.getUsername());
 
                 //Now insert user
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference usersRef = database.getReference("user").child(user.getUsername());
-                usersRef.setValue(user);
-                usersRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user1 = dataSnapshot.getValue(User.class);
-                        notice("Register successful!!!");
-                        Log.e(TAG, "Value is: " + user1.getFullName());
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                        notice("Đã có lỗi khi đăng ký");
-                    }
-                });
-            } else {
+                insertUser(user);
             }
         });
     }
 
-    public void checkUserExisted(String username) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("user").child(username);
-        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void insertUser(User user) {
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference(AppConstants.USER_REF).child(user.getUsername());
+        ref.setValue(user);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    User user = snapshot.getValue(User.class);
-                    notice("Người dùng đã tồn tại");
-                    Log.e(TAG, user.getEmail());
-                } else {
-                    register(
-                            editTextRegisterFullname.getText().toString(),
-                            editTextRegisterUsername.getText().toString(),
-                            editTextRegisterPassword.getText().toString()
-                    );
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user1 = dataSnapshot.getValue(User.class);
+                showMessage("Register successful!!!");
+                hideLoading();
+                Log.e(TAG, "Value is: " + user1.getFullName());
+                finish();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //ignored
+            public void onCancelled(DatabaseError error) {
+                Log.e(TAG, "Failed to read value.", error.toException());
+                showMessage("Đã có lỗi khi đăng ký");
+                hideLoading();
             }
         });
     }
+
 }

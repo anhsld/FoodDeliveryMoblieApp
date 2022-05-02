@@ -2,15 +2,16 @@ package com.example.quanlydoan.ui.order;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.hardware.lights.LightState;
 import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.quanlydoan.R;
+import com.example.quanlydoan.data.model.Order;
+import com.example.quanlydoan.ui.BaseActivity;
 
 import java.util.ArrayList;
 
-public class OrderActivity extends AppCompatActivity {
+public class OrderActivity extends BaseActivity {
     ListView listViewOrder;
     ArrayList<Order> orders = new ArrayList<>();
     OrderAdapter orderAdapter;
@@ -18,8 +19,6 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-        getSupportActionBar().hide();
-        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
         setControl();
         setEvent();
     }
