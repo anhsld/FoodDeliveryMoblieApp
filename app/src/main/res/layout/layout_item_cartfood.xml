@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingVertical="12dp">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/llHomeSlide"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:id="@+id/imgCartItemFood"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_gray"
+            android:src="@drawable/item_2d" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="12dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/txtCartItemFoodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pizza"
+            android:textColor="@color/gray_text"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/txtCartItemFoodPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="4dp"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtCartItemFoodAllPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="4dp"
+                android:layout_marginLeft="8dp"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnCartItemDec"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white"
+                android:gravity="center"
+                android:text="@string/minus"
+                android:textColor="@color/black"
+                android:textSize="28dp" />
+
+            <TextView
+                android:id="@+id/txtCartItemFoodAmount"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginTop="-4dp"
+                android:text="@string/number_example"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/btnCartItemInc"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white"
+                android:gravity="center"
+                android:text="@string/plus"
+                android:textColor="@color/black"
+                android:textSize="28dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:src="@drawable/trash_icon"
+                android:id="@+id/btnCartItemRemove"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="12dp"
+                android:textColor="@color/black"
+                android:textSize="28dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

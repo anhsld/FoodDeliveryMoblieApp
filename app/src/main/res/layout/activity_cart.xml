@@ -1,13 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.home.HomeActivity"
-    android:orientation="vertical">
+    style="@style/style_layout"
+    android:background="@color/white">
+
     <TextView
+        android:id="@+id/tvCartTitle"
+        style="@style/style_screen_title"
+        android:text="@string/my_cart" />
+
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/llDiscount"
+        android:layout_below="@id/tvCartTitle"
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/listViewCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:background="@color/transparent"
+            android:divider="@null"
+            android:dividerHeight="12dp" />
+
+        <ImageView
+            android:src="@drawable/empty_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imgCartEmpty"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llDiscount"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"/>
-</LinearLayout>
+        android:layout_above="@+id/llPrice"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_white"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp">
+
+        <EditText
+            android:id="@+id/editTextTypeVoucher"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/type_discount"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPrice"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_above="@+id/btnCartCheckout"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_white"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_total"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewCartTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_service"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewCartShipCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/discount"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewCartDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="#ccc" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewCartTotalPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCartCheckout"
+        style="@style/style_bottom_btn"
+        android:text="@string/check_out" />
+</RelativeLayout>

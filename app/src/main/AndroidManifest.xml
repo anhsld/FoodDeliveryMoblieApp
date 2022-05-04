@@ -5,14 +5,25 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyDoAn">
+        <activity
+            android:name=".ui.orderInfo.OrderInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.order.OrderActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.foodinfo.FoodInfoActivity"
             android:exported="false" />
@@ -27,6 +38,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.start.MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.start.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.start.StartActivity"

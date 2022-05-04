@@ -1,9 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/style_layout"
     tools:context=".ui.profile.ProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvProfileTitle"
+        android:layout_alignParentTop="true"
+        android:text="@string/profile"
+        style="@style/style_screen_title" />
+
+    <LinearLayout
+        android:layout_below="@id/tvProfileTitle"
+        android:id="@+id/llProfileHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical"
+            android:paddingRight="32dp">
+
+            <TextView
+                android:id="@+id/btnProfileLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textAlignment="textEnd"
+                android:textColor="@color/gray_text" />
+
+            <View
+                android:layout_width="44dp"
+                android:layout_height="1dp"
+                android:layout_gravity="right"
+                android:background="@color/blue" />
+        </LinearLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfileAvatar"
+            android:layout_width="120dp"
+            android:layout_height="125dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/customer"
+            app:shapeAppearanceOverlay="@style/style_circle_image"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/btnProfileChooseAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/choose_avatar"
+            android:textAlignment="center"
+            android:textColor="@color/gray_text"
+            android:textSize="14dp" />
+
+        <View
+            android:layout_width="90dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-2dp"
+            android:background="@color/blue" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/svHomeInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnProfileUpdate"
+        android:layout_below="@+id/llProfileHeader">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp">
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/fullname" />
+
+            <EditText
+                android:id="@+id/editTextProfileFullname"
+                style="@style/style_input"
+                android:text="@string/fullname" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/phone" />
+
+            <EditText
+                android:id="@+id/editTextProfilePhone"
+                style="@style/style_input"
+                android:text="@string/phone" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/email" />
+
+            <EditText
+                android:id="@+id/editTextProfileEmail"
+                style="@style/style_input"
+                android:text="@string/email" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/address" />
+
+            <EditText
+                android:id="@+id/editTextProfileAddress"
+                style="@style/style_input"
+                android:text="@string/address" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/password" />
+
+            <EditText
+                android:id="@+id/editTextProfilePassword"
+                style="@style/style_input"
+                android:inputType="textPassword"
+                android:text="@string/password" />
+
+            <TextView
+                style="@style/style_profile_title"
+                android:text="@string/retype_password" />
+
+            <EditText
+                android:id="@+id/editTextProfileRetypePassword"
+                style="@style/style_input"
+                android:inputType="textPassword"
+                android:text="@string/password" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnProfileUpdate"
+        style="@style/style_bottom_btn"
+        android:text="@string/update" />
+
+</RelativeLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/style_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.start.LoginActivity">
+
+    <TextView
+        android:id="@+id/tvStartTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="36dp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/primary"
+        android:textSize="32dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ivStartLogo"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_below="@id/tvStartTitle"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/llRegisterForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivStartLogo"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="36dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/name_icon" />
+
+            <EditText
+                android:id="@+id/editTextRegisterFullname"
+                style="@style/style_input"
+                android:hint="@string/your_name"
+                android:textColorHint="@color/gray_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/user_icon" />
+
+            <EditText
+                android:id="@+id/editTextRegisterUsername"
+                style="@style/style_input"
+                android:hint="@string/username"
+                android:textColorHint="@color/gray_text" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/lock_icon" />
+
+            <EditText
+                android:id="@+id/editTextRegisterPassword"
+                style="@style/style_input"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColorHint="@color/gray_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/lock_icon" />
+
+            <EditText
+                android:id="@+id/editTextRegisterPasswordRetype"
+                style="@style/style_input"
+                android:hint="@string/retype_password"
+                android:inputType="textPassword"
+                android:textColorHint="@color/gray_text" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            style="@style/style_bottom_btn"
+            android:text="@string/register" />
+    </LinearLayout>
+
+</RelativeLayout>
