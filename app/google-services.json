@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "630901076748",
-    "firebase_url": "https://foodorder-22170-default-rtdb.firebaseio.com",
-    "project_id": "foodorder-22170",
-    "storage_bucket": "foodorder-22170.appspot.com"
+    "project_number": "265621241091",
+    "firebase_url": "https://foodorder-3b676-default-rtdb.firebaseio.com",
+    "project_id": "foodorder-3b676",
+    "storage_bucket": "foodorder-3b676.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:630901076748:android:7946407433f5879ba24f29",
+        "mobilesdk_app_id": "1:265621241091:android:9ed95f2c944b4fa9477d36",
         "android_client_info": {
           "package_name": "com.example.quanlydoan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "630901076748-he8poh20lhjls8svj339ck9haep6rb66.apps.googleusercontent.com",
+          "client_id": "265621241091-4u9opesutqsvqsnu2n0f4qrla65udcbl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCKVKpONp6qZ0YH31MMv207nRo3QL7g6Pk"
+          "current_key": "AIzaSyB0j6N2W6ygycRhjcs6LGrq0Dl-yoySIdo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "630901076748-he8poh20lhjls8svj339ck9haep6rb66.apps.googleusercontent.com",
+              "client_id": "265621241091-4u9opesutqsvqsnu2n0f4qrla65udcbl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
