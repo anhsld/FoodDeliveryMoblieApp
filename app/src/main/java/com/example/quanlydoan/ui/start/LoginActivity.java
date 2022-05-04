@@ -86,6 +86,7 @@ public class LoginActivity extends BaseActivity {
                     if (user.getPassword().equals(password)) {
                         Log.e(TAG, user.getEmail());
 
+//                        Lưu thông tin người dùng vào prefsHelper
                         PrefsHelper prefsHelper = PrefsHelper.getInstance(getApplicationContext());
                         prefsHelper.setCurrentUser(user);
                         Order order = new Order();

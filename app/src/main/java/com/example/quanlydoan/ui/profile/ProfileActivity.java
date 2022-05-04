@@ -146,6 +146,18 @@ public class ProfileActivity extends BaseActivity {
             return false;
         }
 
+//        Thêm kiểm tra mật khẩu trống và 2 mật khẩu khớp nhau không
+        if(editTextProfilePassword.getText().toString().trim().equals("")
+                || editTextProfileRetypePassword.getText().toString().trim().equals("")){
+            showMessage("Password cannot empty");
+            return false;
+        }
+
+        if(editTextProfilePassword.getText().toString().trim().equals(editTextProfileRetypePassword.getText().toString().trim())){
+            showMessage("Retype password not correct");
+            return false;
+        }
+
         return true;
     }
 

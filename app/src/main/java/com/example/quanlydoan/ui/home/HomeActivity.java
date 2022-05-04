@@ -95,6 +95,12 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.Callba
         setControl();
         setEvent();
         setData();
+
+        // get update of location every 2 secs
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(2000);
+
         getCurrentLocation();
     }
 
@@ -266,7 +272,7 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.Callba
     private void setupSlider() {
         SliderAdapter adapter = new SliderAdapter(discounts);
         sliderView.setAdapter(adapter);
-        sliderView.setNestedScrollingEnabled(false);
+
         sliderView.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
         autoSlideViewPager();
     }
@@ -298,6 +304,8 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.Callba
                                     double longitude = locationResult.getLocations().get(index).getLongitude();
                                     Log.e("TAG1", "Latitude: "+ latitude + "\n" + "Longitude: "+ longitude);
 
+                                    AppConstants.CURRENT_LATITUDE = latitude;
+                                    AppConstants.CURRENT_LONGITUDE = longitude;
                                     try {
                                         Geocoder geocoder = new Geocoder(HomeActivity.this, Locale.getDefault());
                                         List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
