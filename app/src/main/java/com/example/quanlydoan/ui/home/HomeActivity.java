@@ -95,6 +95,11 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.Callba
         setControl();
         setEvent();
         setData();
+
+        // get update of location every 2 secs
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(2000);
         getCurrentLocation();
     }
 
@@ -297,7 +302,8 @@ public class HomeActivity extends BaseActivity implements CategoryAdapter.Callba
                                     double latitude = locationResult.getLocations().get(index).getLatitude();
                                     double longitude = locationResult.getLocations().get(index).getLongitude();
                                     Log.e("TAG1", "Latitude: "+ latitude + "\n" + "Longitude: "+ longitude);
-
+                                    AppConstants.CURRENT_LATITUDE = latitude;
+                                    AppConstants.CURRENT_LONGITUDE = longitude;
                                     try {
                                         Geocoder geocoder = new Geocoder(HomeActivity.this, Locale.getDefault());
                                         List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
