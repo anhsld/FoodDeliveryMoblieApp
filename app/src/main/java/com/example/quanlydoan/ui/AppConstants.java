@@ -17,6 +17,7 @@ public class AppConstants {
 
     public static final int REQUEST_CODE_FOLDER = 123;
     public static final int REQUEST_LOCATION_PERMISSION = 999;
+    public static final int REQUEST_GPS_PERMISSION = 666;
 
     public static final int DIALOG_POPUP_TIME = 2000;
 
