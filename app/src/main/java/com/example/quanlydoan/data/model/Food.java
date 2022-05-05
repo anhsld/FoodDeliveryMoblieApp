@@ -2,6 +2,7 @@ package com.example.quanlydoan.data.model;
 
 import java.io.Serializable;
 
+//implement Serializable để gửi Food từ activity này sang activity khác
 public class Food implements Serializable {
     private String foodId;
     private String categoryId;
