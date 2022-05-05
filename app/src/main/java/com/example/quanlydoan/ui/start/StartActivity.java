@@ -42,6 +42,7 @@ public class StartActivity extends BaseActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // Kiểm tra nếu người dùng đã đăng nhập rồi thì mở activity home còn không thì mở activity login
                 if (PrefsHelper.getInstance(getApplicationContext()).getCurrentUser() != null) {
 //                    Đoạn này dùng để chuyển từ StartActivity sang MenuActivity
